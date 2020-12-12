@@ -92,6 +92,12 @@
  */
  uint16 temperature;
  uint16 humidity;
+ uint16 manID;
+ uint16 devID;
+ uint16 SerIdFirst;
+ uint16 SerIdMid;
+ uint16 SerIdLast;
+ bool ReadSensorIDs = true;
 
 /*******************************************************************************
  * EXTERNS
@@ -156,6 +162,8 @@ int main()
     scifHdc1080StartRtcTicksNow(0x00010000 / rtc_Hz);
 
     // Configure Sensor Controller tasks SCIF_HDC1080_TASK_HDC1080_TASK_ID
+    scifHdc1080TaskData.taskHdc1080.cfg.TmpEnable=true;
+    scifHdc1080TaskData.taskHdc1080.cfg.HumEnable=true;
 
     // Start Sensor Controller task
     scifStartTasksNbl(BV(SCIF_HDC1080_TASK_HDC1080_TASK_ID));
@@ -297,6 +305,21 @@ void processTaskAlert(void)
   scifClearAlertIntSource();
   //----------------------------------------------------------------------------
   // Do SC Task processing here
+  if(ReadSensorIDs) {
+      manID = scifHdc1080TaskData.taskHdc1080.output.manID;
+       scifHdc1080TaskData.taskHdc1080.cfg.ManIdEnable=false;
+
+       devID = scifHdc1080TaskData.taskHdc1080.output.devID;
+       scifHdc1080TaskData.taskHdc1080.cfg.DevIdEnable=false;
+
+       SerIdFirst = scifHdc1080TaskData.taskHdc1080.output.SerIdFirst;
+       SerIdMid = scifHdc1080TaskData.taskHdc1080.output.SerIdMid;
+       SerIdLast = scifHdc1080TaskData.taskHdc1080.output.SerIdLast;
+       scifHdc1080TaskData.taskHdc1080.cfg.SerIdEnable=false;
+
+       ReadSensorIDs=false;
+  }
+  //----
   temperature = scifHdc1080TaskData.taskHdc1080.output.tmp;
   humidity = scifHdc1080TaskData.taskHdc1080.output.hum;
 
