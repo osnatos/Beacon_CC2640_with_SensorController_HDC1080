@@ -14,6 +14,6 @@ Based on the Ti CC2640R2F SoC.
 * [Eddystone TLM frame](https://github.com/google/eddystone/blob/master/eddystone-tlm/tlm-plain.md) is used for temperature advertising. 
 This makes it possible to use applications such as [Beacon Scaner](https://play.google.com/store/apps/details?id=com.bridou_n.beaconscanner) or similar for viewing.
 * Fot humidity advertising, TLM format expanded, additional two bytes are added(bytes offset 14,15). 
-Humidity, measured by the beacon, is expressed in a unsigned [8.8 fixed-point notation](https://inst.eecs.berkeley.edu/~cs61c/sp06/handout/fixedpt.html). 
-Range of the humidity  0-100%. 
- To view humidity, you need an application that can work with the extended TLM format.
+  Humidity, measured by the beacon, is expressed in a unsigned [8.8 fixed-point notation](https://inst.eecs.berkeley.edu/~cs61c/sp06/handout/fixedpt.html). 
+  Range of the humidity  0-100%. 
+  To view humidity, you need an application that can work with the extended TLM format.
