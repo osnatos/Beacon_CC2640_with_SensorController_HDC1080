@@ -9,3 +9,8 @@ Based on the Ti CC2640R2F SoC.
 * Code Composer Studio v10.1.0
 * XDCtools v3.51.03.28_core
 * simplelink_cc2640r2_sdk_4_20_00_04
+
+# Temperature and humidity format:
+* Eddystone TLM format is used to display temperature. 
+This makes it possible to use applications such as [Beacon Scaner](https://play.google.com/store/apps/details?id=com.bridou_n.beaconscanner) or similar for viewing.
+* To humidity, TLM format expanded (additional bytes are added). To view humidity, you need an application that can work with the extended TLM format.
