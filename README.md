@@ -17,3 +17,9 @@ This makes it possible to use applications such as [Beacon Scaner](https://play.
   Humidity, measured by the beacon, is expressed in a unsigned [8.8 fixed-point notation](https://inst.eecs.berkeley.edu/~cs61c/sp06/handout/fixedpt.html). 
   Range of the humidity  0-100%. 
   To view humidity, you need an application that can work with the extended TLM format.
+
+# How to change TX output power.
+* To change TX output power, you need to change the TX_POWER constant in the micro_eddystone_beacon.c file.
+* Possible values are defined in the urfc.h file.
+Maximum value = TX_POWER_5_DBM   (5 dbm).
+Minimum value = TX_POWER_MINUS_21_DBM (-21 dbm).         
