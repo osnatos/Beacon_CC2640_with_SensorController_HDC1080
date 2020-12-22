@@ -33,7 +33,7 @@
 /*********************************************************************
  * MACROS
  */
-
+//--------------------------------------------------------------------
 // Eddystone Base 128-bit UUID: EE0CXXXX-8786-40BA-AB96-99B91AC981D8
 #define EDDYSTONE_BASE_UUID_128( uuid )  0xD8, 0x81, 0xC9, 0x1A, 0xB9, 0x99, \
                                          0x96, 0xAB, 0xBA, 0x40, 0x86, 0x87, \
@@ -42,7 +42,9 @@
 /*********************************************************************
  * CONSTANTS
  */
-
+//---
+#define TX_POWER TX_POWER_5_DBM
+//---
 // Advertising interval (units of 0.625 millisec)
 #define DEFAULT_ADVERTISING_INTERVAL          800 // 500 ms
 
@@ -136,10 +138,8 @@ typedef struct {
   uint8 temp[2];        // Temperature. Signed 8.8 fixed point
   uint8 advCnt[4];      // Adv count since power-up/reboot
   uint8 secCnt[4];      // Time since power-up/reboot
-                          // in 0.1 second resolution
-  uint8 humidity[2];    // Humidity. Signed 8.8 fixed point
-
-
+                        // in 0.1 second resolution
+  uint8 humidity[2];    // Humidity. Unsigned 8.8 fixed point
 } eddystoneTLM_t;
 
 typedef union {
@@ -766,6 +766,10 @@ static void MicroEddystoneBeacon_bcast_stateChangeCB(ugapBcastState_t newState)
     {
       // Parameter containers
       uint16 param16; /* 16-bit parameter */
+
+      // Setup TX power
+      param16 = TX_POWER;
+      uble_setParameter(UBLE_PARAM_TXPOWER, sizeof(uint16), &param16);
 
       // Setup broadcaster duty cycle
 //    ugap_bcastSetDuty(100, 50); /* OnTime: 10 sec, OffTime: 5 sec */
