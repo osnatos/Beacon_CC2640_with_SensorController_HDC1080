@@ -90,8 +90,8 @@
 /*******************************************************************************
  * GLOBAL VARIABLES
  */
- uint16 temperature;
- uint16 humidity;
+ float temperature;
+ float humidity;
  uint16 manID;
  uint16 devID;
  uint16 SerIdFirst;
